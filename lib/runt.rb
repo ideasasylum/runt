@@ -34,7 +34,6 @@
 require 'yaml'
 require 'time'
 require 'date'
-require 'date/format'
 require "runt/version"
 require "runt/dprecision"
 require "runt/pdate"
@@ -50,19 +49,19 @@ require "runt/expressionbuilder"
 # defines some new constants and exposes some already defined in the standard
 # library classes <tt>Date</tt> and <tt>DateTime</tt>.
 #
-# <b>See also</b> runt/sugar_rb which re-opens this module and adds 
+# <b>See also</b> runt/sugar_rb which re-opens this module and adds
 # some additional functionality
 #
 # <b>See also</b> date.rb
 #
 module Runt
-  
+
   class << self
-    
+
     def day_name(number)
       Date::DAYNAMES[number]
     end
-    
+
     def month_name(number)
       Date::MONTHNAMES[number]
     end
@@ -74,7 +73,7 @@ module Runt
     def format_date(date)
       date.ctime
     end
-    
+
     #
     # Cut and pasted from activesupport-1.2.5/lib/inflector.rb
     #
@@ -82,7 +81,7 @@ module Runt
       if (number.to_i==-1)
 	'last'
       elsif (number.to_i==-2)
-	'second to last'  
+	'second to last'
       elsif (11..13).include?(number.to_i % 100)
 	"#{number}th"
       else
@@ -155,7 +154,7 @@ module Runt
 end
 
 #
-# Add precision +Runt::DPrecision+ to standard library classes Date and DateTime 
+# Add precision +Runt::DPrecision+ to standard library classes Date and DateTime
 # (which is a subclass of Date). Also, add an include? method for interoperability
 # with +Runt::TExpr+ classes
 #
@@ -175,17 +174,17 @@ class Date
         @date_precision = Runt::DPrecision::DAY
 	  end
 	end
-    @date_precision	
-  end 	  
+    @date_precision
+  end
 end
 
 #
-# Add the ability to use Time class 
+# Add the ability to use Time class
 #
 # Contributed by Paul Wright
 #
 class Time
-  
+
   include Runt
 
   attr_accessor :date_precision
@@ -230,21 +229,21 @@ end
 #
 # Useful shortcuts!
 #
-# Contributed by Ara T. Howard who is pretty sure he got the idea from 
+# Contributed by Ara T. Howard who is pretty sure he got the idea from
 # somewhere else. :-)
 #
 class Numeric #:nodoc:
-  def microseconds() Float(self  * (10 ** -6)) end unless self.instance_methods.include?('microseconds')
-  def milliseconds() Float(self  * (10 ** -3)) end unless self.instance_methods.include?('milliseconds')
-  def seconds() self end unless self.instance_methods.include?('seconds')
-  def minutes() 60 * seconds end unless self.instance_methods.include?('minutes')
-  def hours() 60 * minutes end unless self.instance_methods.include?('hours')
-  def days() 24 * hours end unless self.instance_methods.include?('days')
-  def weeks() 7 * days end unless self.instance_methods.include?('weeks')
-  def months() 30 * days end unless self.instance_methods.include?('months')
-  def years() 365 * days end unless self.instance_methods.include?('years')
-  def decades() 10 * years end unless self.instance_methods.include?('decades')
-  # This causes RDoc to hurl:  
+  def microseconds() Float(self  * (10 ** -6)) end unless self.method_defined?('microseconds')
+  def milliseconds() Float(self  * (10 ** -3)) end unless self.method_defined?('milliseconds')
+  def seconds() self end unless self.method_defined?('seconds')
+  def minutes() 60 * seconds end unless self.method_defined?('minutes')
+  def hours() 60 * minutes end unless self.method_defined?('hours')
+  def days() 24 * hours end unless self.method_defined?('days')
+  def weeks() 7 * days end unless self.method_defined?('weeks')
+  def months() 30 * days end unless self.method_defined?('months')
+  def years() 365 * days end unless self.method_defined?('years')
+  def decades() 10 * years end unless self.method_defined?('decades')
+  # This causes RDoc to hurl:
   %w[
   microseconds milliseconds seconds minutes hours days weeks months years decades
   ].each{|m| alias_method m.chop, m}
