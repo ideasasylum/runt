@@ -4,7 +4,7 @@ require 'test/unit'
 require 'runt'
 require 'payment_report'
 
-class ReportTest < Test::Unit::TestCase
+class ReportTest < Test::Unit::Test
 
   include Runt
 
@@ -27,14 +27,14 @@ class ReportTest < Test::Unit::TestCase
   end
   def test_list
     range = PDate.day(2008, 1, 1)..PDate.day(2008,1,31)
-    result = @report.list(range) 
+    result = @report.list(range)
     assert_equal(2, result.size)
     assert_equal(@gas_payment, result[PDate.day(2008, 1, 2)][0])
     assert_equal(@insurance_payment, result[PDate.day(2008, 1, 7)][0])
   end
 end
 
-class PaymentTest < Test::Unit::TestCase
+class PaymentTest < Test::Unit::Test
 
   include Runt
 

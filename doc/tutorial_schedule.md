@@ -93,7 +93,7 @@ class Reminder
 Being rabid foaming-at-the-mouth Agilists, we'll of course also create a unit test to  help flesh out the specifics of our new Reminder class. We'll create test fixtures using the Runt Objects described above.
 
 ```ruby
-class ReminderTest < Test::Unit::TestCase
+class ReminderTest < Test::Unit::Test
 
   include Runt
 
@@ -145,10 +145,10 @@ class Reminder
 ...
 ```
 
-The Schedule#events method will return an Array of Event Objects for any events which occur at the date and time given by the method's argument. Usage is easily demonstrated by a test case which makes use of the fixtures created by the TestCase#setup method defined above.
+The Schedule#events method will return an Array of Event Objects for any events which occur at the date and time given by the method's argument. Usage is easily demonstrated by a test case which makes use of the fixtures created by the Test#setup method defined above.
 
 ```ruby
-class ReminderTest < Test::Unit::TestCase
+class ReminderTest < Test::Unit::Test
   ...
   def test_check
     assert_equal 1, @reminder.check(@monday_at_10).size, "Unexpected size #{@reminder.check(@monday_at_10).size} returned"
@@ -177,7 +177,7 @@ class Reminder
 Testing this is simple thanks to our MailServer stub which simply regurgitates the text argument it's passed as a result. 
 
 ```ruby
-class ReminderTest < Test::Unit::TestCase
+class ReminderTest < Test::Unit::Test
   ...
   def test_send
     params = [@north_event, @south_event]
@@ -207,7 +207,7 @@ class Reminder
   end
   ...
 
-class ReminderTest < Test::Unit::TestCase
+class ReminderTest < Test::Unit::Test
   ...
   def test_send
     params = [@north_event, @south_event]
@@ -308,7 +308,7 @@ end
 
 require 'test/unit' require 'runt' require 'schedule_tutorial'
 
-class ReminderTest < Test::Unit::TestCase
+class ReminderTest < Test::Unit::Test
 
     include Runt
 
